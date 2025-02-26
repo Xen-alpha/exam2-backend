@@ -15,7 +15,7 @@ public class Comment {
     private Long idx;
     @Column(nullable = false)
     private String content;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String writer;
 
     @ManyToOne

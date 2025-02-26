@@ -1,5 +1,6 @@
 package org.springpractice.exam2backend;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springpractice.exam2backend.model.Board;
@@ -19,7 +20,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
 
-    public void createPost(CreatePostRequest createPostRequest) {
+    public void createPost(@Valid CreatePostRequest createPostRequest) {
         Board board = Board.builder()
                 .title(createPostRequest.getTitle())
                 .content(createPostRequest.getContent())
@@ -28,7 +29,7 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public void createComment(CreateCommentRequest createCommentRequest, Long postIdx) {
+    public void createComment(@Valid CreateCommentRequest createCommentRequest, Long postIdx) {
         Board post = boardRepository.findById(postIdx).orElse(null);
         if (post == null) {
             throw new RuntimeException("Post not found");

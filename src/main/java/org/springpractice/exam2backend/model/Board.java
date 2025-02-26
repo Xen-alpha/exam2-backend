@@ -15,11 +15,11 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String title;
     @Column(nullable = false)
     private String content;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String writer;
 
     @OneToMany(mappedBy="post")
