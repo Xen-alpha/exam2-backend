@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class CreateCommentRequest {
     private String content;
     private String writer;
-    private Long postIdx;
 }
