@@ -20,11 +20,26 @@ public class BoardService {
     private final CommentRepository commentRepository;
 
     public void createPost(CreatePostRequest createPostRequest) {
-
+        Board board = Board.builder()
+                .title(createPostRequest.getTitle())
+                .content(createPostRequest.getContent())
+                .writer(createPostRequest.getWriter())
+                .build();
+        boardRepository.save(board);
     }
 
     public void createComment(CreateCommentRequest createCommentRequest, Long postIdx) {
-
+        Board post = boardRepository.findById(postIdx).orElse(null);
+        if (post == null) {
+            throw new RuntimeException("Post not found");
+        } else {
+            Comment comment = Comment.builder()
+                    .content(createCommentRequest.getContent())
+                    .writer(createCommentRequest.getWriter())
+                    .post(post)
+                    .build();
+            commentRepository.save(comment);
+        }
     }
 
     public List<BoardListItemResponse> listAll() {

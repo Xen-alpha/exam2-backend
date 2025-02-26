@@ -39,6 +39,7 @@ public class BoardController {
         BaseResponse<PostResponse> response = BaseResponse.<PostResponse>builder()
                 .success(true).result(result)
                 .build();
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/{idx}/comment")
